@@ -93,6 +93,23 @@ body{font-family:'Segoe UI',Roboto,system-ui,-apple-system,'Helvetica Neue',sans
 .tag.cmb{background:#0F2F57;color:#fff;border-color:#0F2F57}
 .tag.com{background:#ECFDF5;color:#065F46;border-color:#A9E8C8}
 .tag.tra{background:#EFF6FF;color:#1E40AF;border-color:#BFDBFE}
+.tag.exc{background:#FEF3C7;color:#92400E;border-color:#F59E0B}
+.tag.nfe{background:#ECFDF5;color:#065F46;border-color:#A9E8C8}
+.tag.nfe0{background:#FEE2E2;color:#991B1B;border-color:#FCA5A5}
+.tag{font-family:Consolas,Menlo,monospace;letter-spacing:.1px;text-transform:none}
+.ind-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-top:.7rem;font-size:.76rem}
+.ind-grid div{background:#F8FAFC;border:1px solid var(--line);border-radius:8px;padding:.45rem .6rem}
+.ind-grid b{display:block;font-size:.72rem;color:var(--muted);letter-spacing:.2px;margin-bottom:.15rem;font-weight:700;font-family:Consolas,Menlo,monospace;text-transform:none}
+.ind-grid span.val{font-weight:800}
+.ind-grid span.val.sim{color:#065F46}
+.ind-grid span.val.nao{color:#991B1B}
+.ind-grid small.dd{display:block;font-size:.68rem;color:#64748B;line-height:1.45;margin-top:.2rem;font-weight:400}
+.ind-full{grid-column:1/-1}
+details.legend{margin-top:.7rem;font-size:.76rem;background:#F8FAFC;border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem}
+details.legend summary{cursor:pointer;font-weight:800;color:#0B2B4F;font-size:.76rem}
+details.legend dl{margin:.5rem 0 0;display:grid;gap:.35rem}
+details.legend dt{font-family:Consolas,Menlo,monospace;font-weight:800;color:#0F2F57}
+details.legend dd{margin:0;color:#475569;line-height:1.5}
 mark{background:#FEF08A;border-radius:4px;padding:0 2px}
 .empty{padding:2.4rem 1rem;text-align:center;color:#64748B;font-size:.9rem}
 /* inspector */
@@ -138,13 +155,15 @@ footer{background:#070F22;color:#94A3B8;text-align:center;font-size:.76rem;paddi
       <button class="btn line" id="csvBtn" type="button">⬇ CSV</button>
     </div>
     <div class="quick" id="quickRow" aria-label="Atalhos de categoria">
-      <button data-q="dev">↩ Devolução</button>
-      <button data-q="rem">📦 Remessa</button>
-      <button data-q="ret">🔁 Retorno</button>
-      <button data-q="anu">✕ Anulação</button>
-      <button data-q="cmb">⛽ Combustível</button>
-      <button data-q="tra">🚚 Transporte</button>
-      <button data-q="com">📡 Comunicação</button>
+      <button data-q="dev">indDevol</button>
+      <button data-q="rem">indRemes</button>
+      <button data-q="ret">indRetor</button>
+      <button data-q="anu">indAnula</button>
+      <button data-q="cmb">indComb</button>
+      <button data-q="tra">indTransp</button>
+      <button data-q="com">indComunica</button>
+      <button data-q="exc">indExcIBSCBS</button>
+      <button data-q="nfe0">indNFe=0</button>
     </div>
     <p class="disclaimer">⚠ Base informativa, sem valor oficial. Confira o título e a nota explicativa antes de escriturar — devolução espelha a operação de origem.</p>
   </div>
@@ -167,13 +186,35 @@ footer{background:#070F22;color:#94A3B8;text-align:center;font-size:.76rem;paddi
         </div></div>
         <div class="fgroup"><h3>Natureza</h3><div class="radio-list" id="natList">
           <label class="on"><input type="radio" name="nat" value="" checked> Todas</label>
-          <label><input type="radio" name="nat" value="dev"> Devolução <span class="fcount" data-c="dev"></span></label>
-          <label><input type="radio" name="nat" value="ret"> Retorno <span class="fcount" data-c="ret"></span></label>
-          <label><input type="radio" name="nat" value="rem"> Remessa <span class="fcount" data-c="rem"></span></label>
-          <label><input type="radio" name="nat" value="anu"> Anulação <span class="fcount" data-c="anu"></span></label>
-          <label><input type="radio" name="nat" value="cmb"> Combustível <span class="fcount" data-c="cmb"></span></label>
+          <label><input type="radio" name="nat" value="dev"> indDevol <span class="fcount" data-c="dev"></span></label>
+          <label><input type="radio" name="nat" value="ret"> indRetor <span class="fcount" data-c="ret"></span></label>
+          <label><input type="radio" name="nat" value="rem"> indRemes <span class="fcount" data-c="rem"></span></label>
+          <label><input type="radio" name="nat" value="anu"> indAnula <span class="fcount" data-c="anu"></span></label>
+          <label><input type="radio" name="nat" value="cmb"> indComb <span class="fcount" data-c="cmb"></span></label>
+          <label><input type="radio" name="nat" value="com"> indComunica <span class="fcount" data-c="com"></span></label>
+          <label><input type="radio" name="nat" value="tra"> indTransp <span class="fcount" data-c="tra"></span></label>
+        </div></div>
+        <div class="fgroup"><h3>Autorização</h3><div class="radio-list" id="authList">
+          <label class="on"><input type="radio" name="auth" value="" checked> Todas</label>
+          <label><input type="radio" name="auth" value="nfe1"> indNFe <span class="fcount" data-c="nfe1"></span></label>
+          <label><input type="radio" name="auth" value="nfe0"> indNFe=0 <span class="fcount" data-c="nfe0"></span></label>
+          <label><input type="radio" name="auth" value="exc"> indExcIBSCBS <span class="fcount" data-c="exc"></span></label>
         </div></div>
         <button class="wipe" id="wipeBtn" type="button">Limpar tudo</button>
+        <details class="legend">
+          <summary>Descrição dos indicativos (IT 2023.002 v2.10)</summary>
+          <dl>
+            <dt>indNFe</dt><dd>Indica se o CFOP é permitido na NF-e / NFC-e.</dd>
+            <dt>indComunica</dt><dd>Indica se o CFOP é permitido em operação de prestação de serviço de comunicação.</dd>
+            <dt>indTransp</dt><dd>Indica se o CFOP é permitido em operação de prestação de serviço de transporte.</dd>
+            <dt>indDevol</dt><dd>Indica se o CFOP corresponde a operação de devolução.</dd>
+            <dt>indRetor</dt><dd>Indica se o CFOP corresponde a operação de retorno.</dd>
+            <dt>indAnula</dt><dd>Indica se o CFOP corresponde a operação de anulação de valor.</dd>
+            <dt>indRemes</dt><dd>Indica se o CFOP corresponde a operação de remessa.</dd>
+            <dt>indComb</dt><dd>Indica se o CFOP é permitido em operação com combustível ou lubrificante.</dd>
+            <dt>indExcIBSCBS</dt><dd>Indica se o CFOP é permitido na NF-e (modelo 55) emitida por contribuinte exclusivo do IBS/CBS.</dd>
+          </dl>
+        </details>
       </div>
     </aside>
     <section class="panel" aria-label="Resultados">
@@ -189,9 +230,10 @@ footer{background:#070F22;color:#94A3B8;text-align:center;font-size:.76rem;paddi
           <div class="insp-kind"><span id="iKind">—</span><small id="iAmb">Selecione um CFOP na lista</small></div>
         </div>
         <p class="insp-title" id="iTitle">Nenhum CFOP selecionado ainda.</p>
-        <div class="insp-desc" id="iDesc">Use a busca acima ou clique em um cartão ao lado para ver aqui o título completo, a nota explicativa e os marcadores (devolução, retorno, remessa, anulação, combustível…).</div>
+        <div class="insp-desc" id="iDesc">Use a busca acima ou clique em um cartão ao lado para ver aqui o título completo, a nota explicativa e os 10 indicadores oficiais (indNFe, indComunica, indTransp, indDevol, indRetor, indAnula, indRemes, indComb, indExcIBSCBS + vigência).</div>
         <div class="insp-flags" id="iFlags"></div>
-        <div class="kv"><div><b>Vigência inicial</b><span id="iIni">—</span></div><div><b>NF-e</b><span id="iNfe">—</span></div></div>
+        <div class="ind-grid" id="iInds"></div>
+        <div class="kv"><div><b>Vigência inicial</b><span id="iIni">—</span></div><div><b>CFOP</b><span id="iNfe">—</span></div></div>
         <div class="insp-actions"><button class="abtn solid" id="copyBtn" type="button">Copiar código</button><button class="abtn line" id="copyDescBtn" type="button">Copiar título</button></div>
         <div class="guide">💡 <b>Espelho da devolução:</b> venda <b>5.102 → 1.202</b> (mesma UF) · venda <b>6.102 → 2.202</b> (outra UF). Remessa/retorno (ex. 5.901, 5.949) não é venda. Combustíveis seguem regime monofásico (LC 192/2022).</div>
       </div>
@@ -826,16 +868,29 @@ const digits = s => (s||'').toString().replace(/\D/g,'');
 const esc = s => (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const $ = id => document.getElementById(id);
 function flowAmb(c){ const g=(c||'')[0]; if('123'.includes(g)) return ['Entrada', g==='1'?'Mesma UF':g==='2'?'Outra UF':'Exterior']; return ['Saída', g==='5'?'Mesma UF':g==='6'?'Outra UF':'Exterior']; }
+const IND_DESC = {
+  indNFe: 'Indica se o CFOP é permitido na NF-e / NFC-e.',
+  indComunica: 'Indica se o CFOP é permitido em operação de prestação de serviço de comunicação.',
+  indTransp: 'Indica se o CFOP é permitido em operação de prestação de serviço de transporte.',
+  indDevol: 'Indica se o CFOP corresponde a operação de devolução.',
+  indRetor: 'Indica se o CFOP corresponde a operação de retorno.',
+  indAnula: 'Indica se o CFOP corresponde a operação de anulação de valor.',
+  indRemes: 'Indica se o CFOP corresponde a operação de remessa.',
+  indComb: 'Indica se o CFOP é permitido em operação com combustível ou lubrificante.',
+  indExcIBSCBS: 'Indica se o CFOP é permitido na NF-e (modelo 55) emitida por contribuinte exclusivo do IBS/CBS.'
+};
 function tags(r){
   const [f]=flowAmb(r.c); const o=[];
   o.push('<span class="tag '+(f==='Entrada'?'e':'s')+'">'+f.toUpperCase()+'</span>');
-  if(r.dev)o.push('<span class="tag dev">DEVOLUÇÃO</span>');
-  if(r.ret)o.push('<span class="tag ret">RETORNO</span>');
-  if(r.rem)o.push('<span class="tag rem">REMESSA</span>');
-  if(r.anu)o.push('<span class="tag anu">ANULAÇÃO</span>');
-  if(r.cmb)o.push('<span class="tag cmb">COMBUSTÍVEL</span>');
-  if(r.com)o.push('<span class="tag com">COMUNICAÇÃO</span>');
-  if(r.tra)o.push('<span class="tag tra">TRANSPORTE</span>');
+  if(r.nfe)o.push('<span class="tag nfe" title="'+esc(IND_DESC.indNFe)+'">indNFe</span>');
+  if(r.com)o.push('<span class="tag com" title="'+esc(IND_DESC.indComunica)+'">indComunica</span>');
+  if(r.tra)o.push('<span class="tag tra" title="'+esc(IND_DESC.indTransp)+'">indTransp</span>');
+  if(r.dev)o.push('<span class="tag dev" title="'+esc(IND_DESC.indDevol)+'">indDevol</span>');
+  if(r.ret)o.push('<span class="tag ret" title="'+esc(IND_DESC.indRetor)+'">indRetor</span>');
+  if(r.anu)o.push('<span class="tag anu" title="'+esc(IND_DESC.indAnula)+'">indAnula</span>');
+  if(r.rem)o.push('<span class="tag rem" title="'+esc(IND_DESC.indRemes)+'">indRemes</span>');
+  if(r.cmb)o.push('<span class="tag cmb" title="'+esc(IND_DESC.indComb)+'">indComb</span>');
+  if(r.exc)o.push('<span class="tag exc" title="'+esc(IND_DESC.indExcIBSCBS)+'">indExcIBSCBS</span>');
   return o.join('');
 }
 function hi(text, term){
@@ -852,7 +907,8 @@ function state(){
   const flow = (document.querySelector('input[name=flow]:checked')||{}).value || '';
   const amb = (document.querySelector('input[name=amb]:checked')||{}).value || '';
   const nat = (document.querySelector('input[name=nat]:checked')||{}).value || '';
-  return { code: digits($('qCode').value), text: norm($('qText').value.trim()), flow, amb, nat };
+  const auth = (document.querySelector('input[name=auth]:checked')||{}).value || '';
+  return { code: digits($('qCode').value), text: norm($('qText').value.trim()), flow, amb, nat, auth };
 }
 function match(r, s){
   if(s.code && !digits(r.c).startsWith(s.code)) return false;
@@ -866,6 +922,11 @@ function match(r, s){
   if(s.nat==='rem' && !r.rem) return false;
   if(s.nat==='anu' && !r.anu) return false;
   if(s.nat==='cmb' && !r.cmb) return false;
+  if(s.nat==='com' && !r.com) return false;
+  if(s.nat==='tra' && !r.tra) return false;
+  if(s.auth==='nfe1' && !r.nfe) return false;
+  if(s.auth==='nfe0' && r.nfe) return false;
+  if(s.auth==='exc' && !r.exc) return false;
   if(s.text){ const hay = norm(r.c+' '+r.t+' '+r.d); if(!s.text.split(/\s+/).every(w=>hay.includes(w))) return false; }
   return true;
 }
@@ -903,19 +964,31 @@ function select(code, scroll){
   $('iTitle').textContent = r.t;
   $('iDesc').textContent = r.d;
   $('iIni').textContent = r.ini || '—';
-  $('iNfe').textContent = r.nfe ? 'Previsto em NF-e' : 'Vide legislação';
+  $('iNfe').textContent = r.c + ' · ' + f + ' · ' + a;
+  const simNao = v => v ? '<span class="val sim">Sim ('+v+')</span>' : '<span class="val nao">Não (0)</span>';
+  const cell = (k,v) => '<div title="'+esc(IND_DESC[k])+'"><b>'+k+'</b>'+simNao(v)+'<small class="dd">'+esc(IND_DESC[k])+'</small></div>';
+  $('iInds').innerHTML =
+    cell('indNFe',r.nfe)+
+    cell('indComunica',r.com)+
+    cell('indTransp',r.tra)+
+    cell('indDevol',r.dev)+
+    cell('indRetor',r.ret)+
+    cell('indAnula',r.anu)+
+    cell('indRemes',r.rem)+
+    cell('indComb',r.cmb)+
+    '<div class="ind-full" title="'+esc(IND_DESC.indExcIBSCBS)+'"><b>indExcIBSCBS</b>'+simNao(r.exc)+'<small class="dd">'+esc(IND_DESC.indExcIBSCBS)+'</small></div>';
   $('iFlags').innerHTML = tags(r);
   if(scroll && window.innerWidth<=1100) $('insp').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 function counts(){
-  const c = k => CFOP_DATA.filter(r=> k==='all' ? true : k==='E' ? '123'.includes(r.c[0]) : k==='S' ? '567'.includes(r.c[0]) : k==='int' ? '15'.includes(r.c[0]) : k==='inter' ? '26'.includes(r.c[0]) : k==='ext' ? '37'.includes(r.c[0]) : k==='dev' ? r.dev : k==='ret' ? r.ret : k==='rem' ? r.rem : k==='anu' ? r.anu : k==='cmb' ? r.cmb : false).length;
+  const c = k => CFOP_DATA.filter(r=> k==='all' ? true : k==='E' ? '123'.includes(r.c[0]) : k==='S' ? '567'.includes(r.c[0]) : k==='int' ? '15'.includes(r.c[0]) : k==='inter' ? '26'.includes(r.c[0]) : k==='ext' ? '37'.includes(r.c[0]) : k==='dev' ? r.dev : k==='ret' ? r.ret : k==='rem' ? r.rem : k==='anu' ? r.anu : k==='cmb' ? r.cmb : k==='com' ? r.com : k==='tra' ? r.tra : k==='nfe1' ? r.nfe : k==='nfe0' ? !r.nfe : k==='exc' ? r.exc : false).length;
   document.querySelectorAll('.fcount').forEach(el=>el.textContent = c(el.dataset.c));
   $('totalPill').textContent = CFOP_DATA.length;
 }
 function toCSV(rows){
   const q = s => '"'+((s||'').toString().replace(/"/g,'""'))+'"';
-  return 'CFOP;Fluxo;Abrangencia;Titulo;Descricao;Devolucao;Retorno;Anulacao;Remessa;Comb;Comunica;Transporte;NFe;Inicio\n'
-    + rows.map(r=>{ const [f,a]=flowAmb(r.c); return [r.c,f,a,q(r.t),q(r.d),r.dev,r.ret,r.anu,r.rem,r.cmb,r.com,r.tra,r.nfe,r.ini].join(';'); }).join('\n');
+  return 'CFOP;Fluxo;Abrangencia;Titulo;Descricao;indNFe;indComunica;indTransp;indDevol;indRetor;indAnula;indRemes;indComb;indExcIBSCBS;Inicio\n'
+    + rows.map(r=>{ const [f,a]=flowAmb(r.c); return [r.c,f,a,q(r.t),q(r.d),r.nfe,r.com,r.tra,r.dev,r.ret,r.anu,r.rem,r.cmb,r.exc,r.ini].join(';'); }).join('\n');
 }
 let deb;
 ['qCode','qText'].forEach(id=>$(id).addEventListener('input', ()=>{ clearTimeout(deb); deb=setTimeout(refresh,220); }));
@@ -925,7 +998,7 @@ $('csvBtn').addEventListener('click', ()=>{
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download='cfop-localizador.csv'; a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),2000);
 });
-document.querySelectorAll('input[name=flow],input[name=amb],input[name=nat]').forEach(i=>i.addEventListener('change', ()=>{
+document.querySelectorAll('input[name=flow],input[name=amb],input[name=nat],input[name=auth]').forEach(i=>i.addEventListener('change', ()=>{
   document.querySelectorAll('.radio-list').forEach(rl=>rl.querySelectorAll('label').forEach(l=>l.classList.toggle('on', !!l.querySelector('input:checked'))));
   refresh();
 }));
@@ -934,9 +1007,11 @@ $('quickRow').addEventListener('click', e=>{
   const on = b.classList.toggle('on');
   document.querySelectorAll('#quickRow button').forEach(x=>{ if(x!==b) x.classList.remove('on'); });
   document.querySelector('input[name=nat][value=""]').checked = true;
-  if(on && ['dev','ret','rem','anu','cmb'].includes(b.dataset.q)) document.querySelector('input[name=nat][value="'+b.dataset.q+'"]').checked = true;
-  if(on && b.dataset.q==='tra'){ $('qText').value='transporte'; } else if(on && b.dataset.q==='com'){ $('qText').value='comunicação'; }
-  else if(!on && ['tra','com'].includes(b.dataset.q)){ $('qText').value=''; }
+  document.querySelector('input[name=auth][value=""]').checked = true;
+  $('qText').value='';
+  if(on && ['dev','ret','rem','anu','cmb','com','tra'].includes(b.dataset.q)) document.querySelector('input[name=nat][value="'+b.dataset.q+'"]').checked = true;
+  if(on && b.dataset.q==='exc') document.querySelector('input[name=auth][value="exc"]').checked = true;
+  if(on && b.dataset.q==='nfe0') document.querySelector('input[name=auth][value="nfe0"]').checked = true;
   document.querySelectorAll('.radio-list').forEach(rl=>rl.querySelectorAll('label').forEach(l=>l.classList.toggle('on', !!l.querySelector('input:checked'))));
   refresh();
 });
@@ -945,6 +1020,7 @@ $('wipeBtn').addEventListener('click', ()=>{
   document.querySelector('input[name=flow][value=""]').checked=true;
   document.querySelector('input[name=amb][value=""]').checked=true;
   document.querySelector('input[name=nat][value=""]').checked=true;
+  document.querySelector('input[name=auth][value=""]').checked=true;
   document.querySelectorAll('#quickRow button').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.radio-list').forEach(rl=>rl.querySelectorAll('label').forEach(l=>l.classList.toggle('on', !!l.querySelector('input:checked'))));
   refresh();
