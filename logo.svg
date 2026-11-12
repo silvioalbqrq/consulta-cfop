@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272 56" width="272" height="56" role="img" aria-label="CFOP · Localizador de Operações">
+  <rect width="56" height="56" rx="14" fill="#0b1f3a"/>
+  <text x="28" y="36" font-family="Arial, sans-serif" font-size="22" font-weight="800" text-anchor="middle" fill="#fff">CF</text>
+  <path d="M16 40h8v1h-8z" fill="#2563eb"/>
+  <path d="M16 43h22v1h-22z" fill="#0f9f6e"/>
+  <text x="68" y="23" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="-.03em" fill="#0b1f3a">CFOP</text>
+  <text x="70" y="41" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="10.5" fill="#5f6f85">Localizador de operações fiscais</text>
+</svg>
