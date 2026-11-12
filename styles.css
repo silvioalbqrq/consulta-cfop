@@ -94,7 +94,8 @@ code { font-family: Consolas, 'SFMono-Regular', Menlo, monospace; font-size: .92
 .search .grow { flex: 1 1 260px; position: relative; min-width: 220px; }
 .search input {
   width: 100%; padding: 10px 13px 10px 36px; border: 1.5px solid var(--line);
-  border-radius: 10px; font-size: .92rem; font-weight: 600; background: #fff; outline: none;
+  border-radius: 10px; font-size: .92rem; font-weight: 600; background: #fff;
+  color: var(--ink); outline: none;
   transition: border-color .18s, box-shadow .18s;
 }
 .search input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37, 99, 235, .12); }
